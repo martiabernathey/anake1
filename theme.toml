@@ -1,0 +1,15 @@
+name = "Ananke for Micro.blog"
+license = "MIT"
+licenselink = "https://github.com/theNewDynamic/gohugo-theme-ananke/blob/master/LICENSE.md"
+description = "Ananke (v2.12.1), ported for Micro.blog: title-optional microposts, categories instead of tags, and a styled /archive page."
+homepage = "https://github.com/theNewDynamic/gohugo-theme-ananke"
+demosite = "https://ananke-theme.netlify.app/"
+tags = ["website", "starter", "responsive", "blog", "Tachyons", "Multilingual", "micro-blog"]
+features = ["posts", "shortcodes", "related content", "comments"]
+min_version = "0.128.0"
+
+authors = [
+  {name = "Patrick Kollitsch", homepage = "https://github.com/davidsneighbour"},
+  {name = "Regis Philibert", homepage = "https://github.com/regisphilibert"},
+  {name = "Bud Parr", homepage = "https://github.com/budparr"}
+]

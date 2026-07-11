@@ -1,0 +1,32 @@
+{{/*
+  Micro.blog always serves a /archive page for every blog, whether or not
+  it's linked from the nav, and falls back to its own "blank" theme's
+  version if this file isn't present. This gives it the site's own styling
+  instead. See: https://help.micro.blog
+*/}}
+{{ define "main" }}
+  <article class="pa3 pa4-ns nested-copy-line-height">
+    <section class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }}">
+      {{ with .Title }}<h1 class="f2 f1-l athelas">{{ . }}</h1>{{ end }}
+      {{ .Content }}
+    </section>
+    <section class="mw7 center ph3 pb5">
+      {{ range .Pages }}
+        <div class="bb b--black-10 pv3 flex items-baseline justify-between">
+          <a href="{{ .RelPermalink }}" class="link black dim f5 mr3">
+            {{ if .Title }}
+              {{ .Title }}
+            {{ else }}
+              {{ .Summary | plainify | truncate 80 }}
+            {{ end }}
+          </a>
+          {{ if not .Date.IsZero }}
+            <time class="f7 mid-gray flex-shrink-0" {{ fmt.Printf `datetime="%s"` (.Date.Format "2006-01-02T15:04:05Z07:00") | safe.HTMLAttr }}>
+              {{- .Date | time.Format (compare.Default "Jan 2, 2006" .Site.Params.date_format) -}}
+            </time>
+          {{ end }}
+        </div>
+      {{ end }}
+    </section>
+  </article>
+{{ end }}

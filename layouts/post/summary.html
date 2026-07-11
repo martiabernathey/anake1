@@ -1,0 +1,22 @@
+  <div class="mb3 pa4 {{ $.Param "text_color" | compare.Default "mid-gray" }} overflow-hidden">
+    {{ if not .Date.IsZero }}
+      <a href="{{ .RelPermalink }}" class="link mid-gray dim no-underline">
+        <div class="f6">
+          {{ .Date | time.Format (compare.Default "January 2, 2006" .Site.Params.date_format) }}
+        </div>
+      </a>
+    {{ end }}
+    {{ if .Title }}
+    <h1 class="f3 near-black">
+      <a href="{{ .RelPermalink }}" class="link black dim">
+        {{ .Title }}
+      </a>
+    </h1>
+    {{ end }}
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      {{ .Summary  }}
+    </div>
+    {{ if .Title }}
+    <a href="{{.RelPermalink}}" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">{{ $.Param "read_more_copy" | compare.Default (lang.Translate "readMore") }}</a>
+    {{ end }}
+  </div>
