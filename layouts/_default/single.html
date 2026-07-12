@@ -22,14 +22,22 @@
       </h1>
       {{ end }}
       {{ with .Params.author | compare.Default .Site.Params.author }}
+      {{ $author := . }}
       <p class="tracked">
         {{- if compare.Eq $page.Language "de" "en" "es" "fr" "it" "no" "pt" -}}
           {{- lang.Translate "by" -}}
         {{ end -}} <strong>
-        {{- if reflect.IsSlice . -}}
-            {{ collections.Delimit . ", " | transform.Markdownify }}
+        {{- if reflect.IsSlice $author -}}
+            {{ collections.Delimit $author ", " | transform.Markdownify }}
+        {{- else if reflect.IsMap $author -}}
+            {{/* Micro.blog "reply" posts (replies to a fediverse/ActivityPub
+                 post) store author as a structured object -- name, username,
+                 avatar, activitypub.url -- instead of a plain string. Render
+                 the name (falling back to username) rather than trying to
+                 Markdownify the whole map. */}}
+            {{- with $author.name -}}{{ . }}{{- else -}}{{ $author.username }}{{- end -}}
         {{- else -}}
-            {{ . | transform.Markdownify }}
+            {{ $author | transform.Markdownify }}
         {{- end -}}
         </strong>
       </p>

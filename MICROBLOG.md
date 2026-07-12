@@ -98,4 +98,15 @@ watching for once you deploy to a test blog:
   `no such template "_internal/..."` error for any of them, it's the same
   class of problem — tell me which one and I'll hand-roll a replacement the
   same way.
+- **Reply posts break the author field.** Micro.blog "replies" (replies to
+  a fediverse/ActivityPub post) store `author` in front matter as a
+  structured object (`name`, `username`, `avatar`, `activitypub.url`)
+  instead of a plain string or list. Stock Ananke assumes string/list and
+  fed it straight into `transform.Markdownify`, which errors on a map.
+  Fixed in `layouts/_default/single.html` and
+  `layouts/_default/summary-with-image.html` to detect a map and render
+  the author's name (or username as fallback) instead. If other content
+  types Micro.blog generates (bookmarks, likes, etc.) have their own
+  unusual front-matter shapes, the same fix pattern applies — send me the
+  error and I'll patch it.
 
