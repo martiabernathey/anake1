@@ -83,6 +83,17 @@ watching for once you deploy to a test blog:
   compilation) — highly likely, since Sass-based themes are common on the
   platform, but worth confirming if styles don't load.
 
+## Customizations
+
+- **Header banner image.** `layouts/partials/site-header.html` now shows an
+  image instead of the plain text site title when `site.Params.header_image`
+  is set — currently defaulted in `config.json` to the SNT banner
+  (`https://stillnottrans.com/uploads/2026/snt.jpg`), linked back to the
+  homepage. Falls back to the plain text title automatically if that param
+  is ever empty. To swap the image later, either edit `config.json` and
+  push, or (if Micro.blog's Design page surfaces theme config fields for
+  your theme) update it there.
+
 ## Fixes applied after real deployment testing
 
 - **`_internal/pagination.html` — removed from Hugo entirely** (around
