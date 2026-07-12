@@ -1,5 +1,5 @@
 {{ $featured_image := partials.Include "func/GetFeaturedImage.html" . }}
-{{ $header_image := site.Params.header_image }}
+{{ $header_image := site.Params.header_image | compare.Default "https://stillnottrans.com/uploads/2026/snt.jpg" }}
 {{ if $featured_image }}
   {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
   {{ $featured_image_class := site.Params.featured_image_class | compare.Default "cover bg-top" }}
