@@ -82,3 +82,20 @@ watching for once you deploy to a test blog:
 - Whether Micro.blog's build passes `hugo.IsExtended` (needed for the Sass
   compilation) — highly likely, since Sass-based themes are common on the
   platform, but worth confirming if styles don't load.
+
+## Fixes applied after real deployment testing
+
+- **`_internal/pagination.html` — removed from Hugo entirely** (around
+  v0.147+), not just a Micro.blog quirk. Both call sites
+  (`layouts/_default/list.html`, `layouts/post/list.html`) now build
+  prev/next links by hand from `.Paginator.HasPrev/HasNext/Prev/Next`
+  instead of relying on the internal template.
+- `layouts/_default/baseof.html` still calls three other Hugo internal
+  templates: `_internal/opengraph.html`, `_internal/schema.html`,
+  `_internal/twitter_cards.html`, plus `_internal/google_analytics.html`
+  and `_internal/disqus.html` used elsewhere. I have no evidence these were
+  removed the way `pagination.html` was, but if you see the same
+  `no such template "_internal/..."` error for any of them, it's the same
+  class of problem — tell me which one and I'll hand-roll a replacement the
+  same way.
+

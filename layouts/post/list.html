@@ -13,6 +13,22 @@
         </div>
       {{ end }}
     </aside>
-    {{ template "_internal/pagination.html" . }}
+    {{ $pag := .Paginator }}
+    {{ if or $pag.HasPrev $pag.HasNext }}
+    <nav class="pv4 ph3 ph5-l flex justify-between" aria-label="Pagination">
+      {{ if $pag.HasPrev }}
+        <a href="{{ $pag.Prev.URL }}" class="f6 f5-l link dim black b" rel="prev">
+          &larr; {{ lang.Translate "moreNewerPosts" | compare.Default "Newer Posts" }}
+        </a>
+      {{ else }}
+        <span></span>
+      {{ end }}
+      {{ if $pag.HasNext }}
+        <a href="{{ $pag.Next.URL }}" class="f6 f5-l link dim black b" rel="next">
+          {{ lang.Translate "moreOlderPosts" | compare.Default "Older Posts" }} &rarr;
+        </a>
+      {{ end }}
+    </nav>
+    {{ end }}
   </article>
 {{ end }}
