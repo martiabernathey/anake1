@@ -1,4 +1,5 @@
 {{ $featured_image := partials.Include "func/GetFeaturedImage.html" . }}
+{{ $header_image := site.Params.header_image }}
 {{ if $featured_image }}
   {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
   {{ $featured_image_class := site.Params.featured_image_class | compare.Default "cover bg-top" }}
@@ -7,9 +8,15 @@
     <div class="{{ $cover_dimming_class }}">
       {{ partials.Include "site-navigation.html" .}}
       <div class="tc-l pv4 pv6-l ph3 ph4-ns">
+        {{ with $header_image }}
+          <a href="{{ site.Home.RelPermalink }}" class="dib">
+            <img src="{{ . }}" alt="{{ site.Title }}" class="mw-100 h-auto" style="max-width: 480px;">
+          </a>
+        {{ else }}
         <h1 class="f2 f-subheadline-l fw2 white-90 mb0 lh-title">
           {{ .Title | compare.Default .Site.Title }}
         </h1>
+        {{ end }}
         {{ with .Params.description }}
           <h2 class="fw1 f5 f3-l white-80 measure-wide-l center mt3">
             {{ . }}
@@ -23,9 +30,15 @@
     <div class="pb3-m pb6-l {{ .Site.Params.background_color_class | compare.Default "bg-black" }}">
       {{ partials.Include "site-navigation.html" . }}
       <div class="tc-l pv3 ph3 ph4-ns">
+        {{ with $header_image }}
+          <a href="{{ site.Home.RelPermalink }}" class="dib">
+            <img src="{{ . }}" alt="{{ site.Title }}" class="mw-100 h-auto" style="max-width: 480px;">
+          </a>
+        {{ else }}
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
           {{ .Title | compare.Default .Site.Title }}
         </h1>
+        {{ end }}
         {{ with .Params.description }}
           <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
             {{ . }}
